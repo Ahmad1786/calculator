@@ -1,7 +1,63 @@
 let firstNumber;
 let operator;
-let secondNumber;
+let result;
+let myString = '';
 
+let displayedString = document.querySelector('#content');
+
+const populateDisplay = function(e) {
+    let clickedButtonText = myString + '' + e.target.textContent;
+    myString = clickedButtonText;
+    displayedString.textContent = clickedButtonText;
+}
+const digitButtons = document.querySelectorAll('.digit');
+digitButtons.forEach(
+    b => b.addEventListener('click', populateDisplay));
+
+const operatorButtons = document.querySelectorAll('.operator');
+operatorButtons.forEach(
+    b => b.addEventListener('click', e => operatingTime(e.target.id))
+);
+
+const clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', () => clearDisplay())
+
+
+ function operatingTime(operation) {
+    operator = operation; 
+
+    if (firstNumber === undefined) {
+        firstNumber = Number(myString);
+        result = firstNumber;
+    }
+    else {
+        firstNumber = result;
+    } 
+    
+    myString = '';
+}
+
+
+function clearDisplay() {
+    displayedString.textContent = '';
+    myString  = '';
+    firstNumber = undefined;
+}
+
+const equalButton = document.querySelector('.equal');
+function showResult() {
+    
+    displayedString.textContent = operate(result, Number(myString), operator);
+    result =  operate(result, Number(myString), operator);
+       
+}
+equalButton.addEventListener('click', () => showResult());
+
+
+
+
+
+// PURE LOGIC (NUMBERS & OPERATORS)
 function add(x,y) {
     return x + y;
 }
@@ -21,17 +77,22 @@ function divide(x,y) {
 function operate(first, second, op) {
     switch(op) {
         case 'add':
-            add(first, second);
+            return add(first, second);
         case 'subtract':
-            subtract(first, second);
+            return subtract(first, second);
         case 'multiply':
-            multiply(first, second);
+            return multiply(first, second);
         case 'divide':
-            divide(first, second);
+            return divide(first, second);
         default:
-            console.log('Error: Invalid operator');
+            console.log('Error: Invalid operatorrr');
             return null;
     }
 }
 
 
+function ty() {
+    console.log("result: " + result);
+    console.log('first #: ' + firstNumber);
+    console.log('myString ' + myString);
+}
