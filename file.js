@@ -42,6 +42,7 @@ function clearDisplay() {
     displayedString.textContent = '';
     myString  = '';
     firstNumber = undefined;
+    result = undefined;
 }
 
 const equalButton = document.querySelector('.equal');
@@ -95,4 +96,9 @@ function ty() {
     console.log("result: " + result);
     console.log('first #: ' + firstNumber);
     console.log('myString ' + myString);
+    console.log('^^^^^^^^^^^^');
 }
+const anyButtons = document.querySelectorAll('button');
+anyButtons.forEach(
+    b => b.addEventListener('click', e => ty())
+);
